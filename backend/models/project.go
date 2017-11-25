@@ -1,8 +1,10 @@
 package models
 
 type Project struct {
-	Model
+	ID uint `gorm:"primary_key" json:"id"`
+
 	PatientID    uint   `gorm:"index"`
+	DoctorID     uint   `gorm:"index"`
 	Description  string `json:"Description"`
 	RelatedTasks []Task `json:"related_tasks"`
 }
