@@ -9,7 +9,6 @@ import (
 	_ "github.com/lib/pq"
 	"fmt"
 	"github.com/flameous/junction-panmeca/backend/models"
-	"os"
 )
 
 func getPatient(c *gin.Context) {
@@ -69,12 +68,8 @@ var (
 func init() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
-	dbUrl, _ := os.LookupEnv("DATABASE_URL")
-	str := fmt.Sprintf(`host=%s user=flameous dbname=models sslmode=disable`, dbUrl)
-	fmt.Println(str)
-	
 	var err error
-	d, err = gorm.Open(`postgres`, str)
+	d, err = gorm.Open(`postgres`, `host=db user=test dbname=models sslmode=disable password=test`)
 	if err != nil {
 		log.Fatal(err)
 	}
