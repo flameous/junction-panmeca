@@ -13,7 +13,7 @@ services:
 
   backend:
     build: backend
-    command: ./wait-for db:5432 -- go run cmd/main.go
+    command: ../wait-for db:5432 -- go run main.go
     environment:
       DATABASE_URL: postgres://demo:demo@db/demo
     ports:

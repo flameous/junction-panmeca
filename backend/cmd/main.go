@@ -1,7 +1,6 @@
 package main
 
 import (
-	"github.com/flameous/backend-meta/backend/models"
 	"github.com/gin-gonic/gin"
 	"strconv"
 	"net/http"
@@ -9,6 +8,8 @@ import (
 	"log"
 	_ "github.com/lib/pq"
 	"fmt"
+	"github.com/flameous/junction-panmeca/backend/models"
+	"os"
 )
 
 func getPatient(c *gin.Context) {
@@ -68,11 +69,16 @@ var (
 func init() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
+	dbUrl, _ := os.LookupEnv("DATABASE_URL")
+	str := fmt.Sprintf(`host=%s user=flameous dbname=models sslmode=disable`, dbUrl)
+	fmt.Println(str)
+	
 	var err error
-	d, err = gorm.Open(`postgres`, `host=localhost user=flameous dbname=models sslmode=disable`)
+	d, err = gorm.Open(`postgres`, str)
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	d.AutoMigrate(&models.Patient{}, &models.Task{}, &models.Project{})
 
 	//p := models.Patient{

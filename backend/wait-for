@@ -1,7 +1,8 @@
 #!/bin/sh
 
-TIMEOUT=15
+TIMEOUT=60
 QUIET=0
+echo wait-for is running!
 
 echoerr() {
   if [ "$QUIET" -ne 1 ]; then printf "%s\n" "$*" 1>&2; fi
@@ -20,6 +21,7 @@ USAGE
 }
 
 wait_for() {
+  echo "host is $HOST, port is $PORT"
   command="$*"
   for i in `seq $TIMEOUT` ; do
     nc -z "$HOST" "$PORT"
