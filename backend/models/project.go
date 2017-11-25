@@ -6,5 +6,5 @@ type Project struct {
 	PatientID    uint   `gorm:"index"`
 	DoctorID     uint   `gorm:"index"`
 	Description  string `json:"Description"`
-	RelatedTasks *[]Task `json:"RelatedTasks"`
+	RelatedTasks []Task `json:"RelatedTasks"`
 }

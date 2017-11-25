@@ -61,7 +61,7 @@ func getUser(id int, isDoc bool) models.User {
 	for k := range projects {
 		tasks := new([]models.Task)
 		d.Model(&projects[k]).Related(tasks)
-		projects[k].RelatedTasks = tasks
+		projects[k].RelatedTasks = *tasks
 	}
 	return user
 }
@@ -75,7 +75,7 @@ func getProject(c *gin.Context) {
 	} else {
 		tasks := new([]models.Task)
 		d.Model(project).Related(tasks, "RelatedTasks")
-		project.RelatedTasks = tasks
+		project.RelatedTasks = *tasks
 		c.IndentedJSON(http.StatusOK, project)
 	}
 }
