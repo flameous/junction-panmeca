@@ -272,4 +272,5 @@ func init() {
 		Image:       "/static/Buccal.stl",
 	}
 	log.Printf("create task 3, error: %v\n", d.Create(&task).Error)
+	log.Println("started!")
 }
